@@ -1,0 +1,12 @@
+einops==0.7.0
+gym==0.23.0
+jsonargparse==4.26.2
+psutil==5.9.6
+pygame==2.5.1
+python-dateutil==2.8.2
+regex==2023.8.8
+torch==2.0.1
+tqdm==4.66.1
+transformers==4.33.1
+vgdl @ git+https://github.com/ahjwang/py-vgdl
+wandb==0.16.1
