@@ -1,4 +1,4 @@
-## Install environment
+## Setup
 
 Create a conda environment
 
@@ -7,6 +7,8 @@ Create a conda environment
 Install dependencies with pip
 
 `pip install -r requirements.txt`
+
+Download the dataset from [this link](https://drive.google.com/file/d/12SSqm_oATfF-eSvU_DBjlvzS38DdIz87/view?usp=sharing) and put it inside `world_model/custom_dataset`
 
 ## Train world models
 
