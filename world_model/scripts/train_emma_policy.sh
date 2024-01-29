@@ -1,8 +1,5 @@
 #!/bin/bash
 
-eval "$(/nas/ucb/$(whoami)/anaconda3/bin/conda shell.bash hook)"
-conda activate lwm
-
 use_wandb=0
 
 exp_name=emma_policy

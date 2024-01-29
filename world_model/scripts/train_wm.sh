@@ -1,8 +1,5 @@
 #!/bin/bash
 
-eval "$(/nas/ucb/$(whoami)/anaconda3/bin/conda shell.bash hook)"
-conda activate lwm
-
 manual=$1
 hidden_size=256
 num_layers=4
