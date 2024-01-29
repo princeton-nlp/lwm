@@ -3,6 +3,7 @@
 Create a conda environment
 
 `conda create -n lwm python=3.9`
+
 `conda activate lwm`
 
 Install dependencies with pip
