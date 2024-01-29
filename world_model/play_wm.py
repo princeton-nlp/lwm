@@ -27,23 +27,13 @@ env = make_env(
 combs = defaultdict(lambda: defaultdict(int))
 
 dataset = utils.make_dataset(args)
-for batch in dataset["train"].iterate_batches(1, args.decoder_max_blocks):
-    true_manual = batch["true_parsed_manual"][0]
-    should_print = False
-    for e in true_manual:
-        combs[e[0]][(e[1], e[2])] += 1
-
-pprint(combs)
-
-print(env)
 
 with open("custom_dataset/data_splits_final_with_messenger_names.json") as f:
     splits = json.load(f)
 
 split = "dev_ne_nr_or_nm"
-# split = "dev_ne_sr_and_sm"
-# split = "train_games"
 
+# TODO: change this ID to visualize a different game
 game_id = 2
 
 game = splits[split][game_id]
@@ -58,17 +48,12 @@ for g in splits["train"]:
         roles[e[0]][e[2]] += 1
         combs[e[0]][(e[1], e[2])] += 1
 
-pprint(combs)
-
 obs, info = env.reset(split=split, entities=game)
-
-print(info["true_parsed_manual"])
-
 
 env.render()
 
 while True:
-    action = int(input("Action: "))
+    action = int(input("Please input next action (0: up, 1: down, 2: left, 3: right, 4: stay)\n"))
     obs, reward, done, _ = env.step(action)
 
     print()

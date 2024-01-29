@@ -13,7 +13,7 @@ import torch
 
 torch.backends.cudnn.deterministic = True
 
-from downstream import ImitationTrainer, Evaluator, ConvEMMA, TransformerEMMA
+from downstream import ImitationTrainer, Evaluator, ConvEMMA
 from messenger.envs import make_env
 from train_wm import make_dataset
 import flags
@@ -22,9 +22,6 @@ import flags
 def make_policy(args):
     if args.emma_policy.base_arch == "conv":
         policy = ConvEMMA().to(args.device)
-    elif args.emma_policy.base_arch == "transformer":
-        policy = TransformerEMMA(args).to(args.device)
-        assert args.emma_policy.hist_len == 1
     else:
         print("Architecture not supported!")
         sys.exit(1)

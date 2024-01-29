@@ -20,6 +20,12 @@ Run the training script
 
 where `${MODEL_NAME}` is one of `none` (observational, no language), `standardv2` (standard Transformer), `direct` (GPT-hard attention), `emma` (our proposed model), `oracle` (oracle semantic-parsing).
 
+To interact with a trained world model, run:
+
+`bash scripts/play_wm.sh ${MODEL_NAME}`
+
+You can change the `game_id` in `play.py` to visualizea different game.
+
 ## Application experiments
 
 

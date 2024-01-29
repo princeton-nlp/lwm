@@ -157,8 +157,8 @@ class StageTwoTransformer(StageTwoCustom):
 
     def render(self, mode):
         grid = self.world_model.detokenize_observations(self.cur_obs).cpu().numpy()
-        print(ENTITY_IDS)
-        print(self.true_parsed_manual)
+        print("Entity index mapping:", ENTITY_IDS)
+        print("Entity attributes in this game:", self.true_parsed_manual)
         print(grid.sum(-1))
         print("Reward:", self.cur_reward.item())
         print("Done: ", self.cur_done.item())
