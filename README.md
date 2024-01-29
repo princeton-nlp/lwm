@@ -24,7 +24,7 @@ To interact with a trained world model, run:
 
 `bash scripts/play_wm.sh ${MODEL_NAME}`
 
-You can change the `game_id` in `play.py` to visualizea different game.
+You can change the `game_id` in `play.py` to visualize a different game.
 
 ## Application experiments
 
