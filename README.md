@@ -3,7 +3,7 @@ This repository contains the code for running experiments. We propose *Language-
 
 ![Example of LWM](teaser.gif)
 
-## Getting Started: Setup
+## 🛠️ Getting Started: Setup
 
 Create a conda environment
 
@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 Finally, download the dataset from [this link](https://drive.google.com/file/d/12SSqm_oATfF-eSvU_DBjlvzS38DdIz87/view?usp=sharing) and put it inside `world_model/custom_dataset`
 
-## Training the World Model
+## 🌎 Training the World Model
 
 First change directory into world_model/
 ```
@@ -46,7 +46,7 @@ bash scripts/play_wm.sh ${MODEL_NAME}
 
 You can change the `game_id` in `play_wm.py` to visualize a different game. If you define a different seed for training the world model, make sure to define the same seed when playing (hard-coded in the current setup).
 
-## Downstream Policy Learning
+## 🤖 Downstream Policy Learning
 
 **Note:** *For filtered behavior cloning, it requires the use of an oracle world model. So before continuing, make sure to train an oracle world model.*
 
