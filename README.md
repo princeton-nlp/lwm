@@ -5,33 +5,51 @@ This repository contains the code for running experiments. We propose *Language-
 
 Create a conda environment
 
-`conda create -n lwm python=3.9 && conda activate lwm`
+```
+conda create -n lwm python=3.9 && conda activate lwm
+```
 
 Install the relevant dependencies through pip:
 
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
 Finally, download the dataset from [this link](https://drive.google.com/file/d/12SSqm_oATfF-eSvU_DBjlvzS38DdIz87/view?usp=sharing) and put it inside `world_model/custom_dataset`
 
-## Train world models
+## Training the World Model
 
-Change directory
+First change directory into world_model/
+```
+cd world_model
+```
 
-`cd world_model`
+In this setting, the world model will learn from observing trajectories and the provided natural language from the game manuals. To train the world model, use the following bash script
+```
+bash scripts/train_wm.sh ${MODEL_NAME}
+```
+where `${MODEL_NAME}` is one of `none` (observational, doesn't use language), `standardv2` (standard Transformer), `direct` (GPT-hard attention), `emma` (our proposed EMMA-LWM model), `oracle` (oracle semantic-parsing). The seed is fixed here and can be changed in the script. 
 
-Run the training script
-
-`bash scripts/train_wm.py ${MODEL_NAME}`
-
-where `${MODEL_NAME}` is one of `none` (observational, no language), `standardv2` (standard Transformer), `direct` (GPT-hard attention), `emma` (our proposed model), `oracle` (oracle semantic-parsing).
-
-To interact with a trained world model, run:
-
+To interact with a trained world model, run.
 `bash scripts/play_wm.sh ${MODEL_NAME}`
 
-You can change the `game_id` in `play.py` to visualize a different game.
+You can change the `game_id` in `play_wm.py` to visualize a different game. If you define a different seed for training the world model, make sure to define the same seed when playing (hard-coded in the current setup).
 
-## Application experiments
+## Downstream Policy Learning
+
+Note: For filtered behavior cloning, it requires the use of an oracle world model. So before training a policy, make sure to train an oracle world model.
+
+Make sure you are in the `world_model/` directory.
+
+To learn a policy for a world model you trained above
+```
+bash scripts/train_downstream.sh ${TRAIN_TASK} ${MODEL_NAME} ${SPLIT} ${GAME}
+```
+where 
+* `${TRAIN_TASK}` is one of `imitation` (Imitation Learning) or `filtered_bc` (Filtered Behavior cloning). See paper for more details.
+* `${MODEL_NAME}` is one of the world models listed in the [Training the World Model](Training the World Model) section.
+* `${SPLIT}` is the difficulty to evaluate on, and is one of `easy` (NewCombo), `medium` (NewAttr), `hard`(NewAll). See paper for more details.
+* `${GAME}` is the game id on MESSENGER to evaluate on. It ranges from 0-29.
 
 
 
