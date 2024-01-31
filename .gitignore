@@ -1,6 +1,7 @@
 *.pyc
 *.DS_Store 
 *.txt
+*__pycache__
 
 data/
 exp/

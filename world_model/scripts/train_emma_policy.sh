@@ -2,8 +2,9 @@
 
 use_wandb=0
 
-exp_name=emma_policy
 seed=8291
+exp_name=emma_policy_${seed}
+
 
 if [ -d "experiments/${exp_name}" ]; then
     rm -rf experiments/${exp_name}

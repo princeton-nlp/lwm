@@ -10,7 +10,7 @@ oracle_ckpt=$5
 
 max_batches=2000
 seed=9434
-oracle_weights_name=emma_conv_8291 # change to your oracle weights path!
+oracle_weights_name=emma_policy_8291 # change to your oracle weights path!
 
 version=downstream_${task}
 exp_name=${version}_${manual}_${split}_game_${game}
@@ -20,7 +20,7 @@ if [ -d "experiments/${exp_name}" ]; then
     rm -rf experiments/${exp_name}
 fi
 
-if [ ${oracle_ckpt} = "half" ] then
+if [ ${oracle_ckpt} = "half" ]; then
     oracle_weights_ckpt=policy_2000
 else
     oracle_weights_ckpt=dev_ne_nr_or_nm_best_avg_return

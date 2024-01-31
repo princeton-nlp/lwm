@@ -1,4 +1,5 @@
 from .conv_emma import ConvEMMA
+from .transformer_emma import TransformerEMMA
 from .evaluate import Evaluator
 from .imitation import ImitationTrainer
 from .rollout import RolloutGenerator
