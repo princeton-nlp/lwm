@@ -48,11 +48,15 @@ You can change the `game_id` in `play_wm.py` to visualize a different game. If y
 
 ## 🤖 Downstream Policy Learning
 
-**Note:** *For filtered behavior cloning, it requires the use of an oracle world model. So before continuing, make sure to train an oracle world model.*
+**Note:** *For filtered behavior cloning, it requires the use of an expert policy. See paper for more details. *
 
-Make sure you are in the `world_model/` directory.
+Make sure you are in the `world_model/` directory. First, train an expert policy (do not skip this step!)
 
-Once you have learned a language-guided world model, you can apply it to downstream policy learning on Messenger (see Table 3 for comprehensive results).
+```
+bash scripts/train_emma_policy.sh
+```
+
+Once you have learned a language-guided world model following "[Training the World Model](#training-the-world-model)", you can apply it to downstream policy learning on Messenger (see Table 3 for comprehensive results).
 ```
 bash scripts/train_downstream.sh ${TRAIN_TASK} ${MODEL_NAME} ${SPLIT} ${GAME}
 ```

@@ -10,7 +10,7 @@ oracle_ckpt=$5
 
 max_batches=2000
 seed=9434
-oracle_weights_name=emma_conv_9434 # change to your oracle weights path!
+oracle_weights_name=emma_conv_8291 # change to your oracle weights path!
 
 version=downstream_${task}
 exp_name=${version}_${manual}_${split}_game_${game}

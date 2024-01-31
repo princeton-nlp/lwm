@@ -19,7 +19,7 @@ if [ -d "experiments/${exp_name}" ]; then
     rm -rf experiments/${exp_name}
 fi
 
-python train_wm.py \
+python -u train_wm.py \
         --version ${version} \
         --exp_name ${exp_name} \
         --manual ${manual} \
