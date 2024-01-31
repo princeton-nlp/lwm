@@ -37,7 +37,7 @@ where `${MODEL_NAME}` is one of
 * `emma` (our proposed EMMA-LWM model)
 * `oracle` (oracle semantic-parsing). 
 
-For more details on the different models, see the paper. The seed is fixed here and can be changed in the script. Full results are in Table 1 of the paper.
+The above script will generate a folder in `experiments/` containing model checkpoints. For more details on the different models, see the paper. The seed is fixed here and can be changed in the script. Full results are in Table 1 of the paper.
 
 To interact with a trained world model, run:
 ```
@@ -50,7 +50,7 @@ You can change the `game_id` in `play_wm.py` to visualize a different game. If y
 
 **Note:** *For filtered behavior cloning, it requires the use of an expert policy. See paper for more details. *
 
-Make sure you are in the `world_model/` directory. First, train an expert policy (do not skip this step!)
+Make sure you are in the `world_model/` directory. First, train an expert policy and save its checkpoints (do not skip this step!):
 
 ```
 bash scripts/train_emma_policy.sh
@@ -67,6 +67,7 @@ where
 * `${GAME}` is the game id on MESSENGER to evaluate on. It ranges from 0-29.
 * `${ORACLE_CKPT}` is either `half`, which will set the oracle weights to a training checkpoint where it was roughly halfway trained. This is specifically for half-trained filtered behavior cloning (see paper for more details). In our experiments, this correponded to `policy_2000.ckpt`, but you can manually change this in the script. Otherwise, any other string will set it to the best oracle world model checkpoint on the hardest validation split.
 
+The above script will generate a folder in `experiments/` containing model checkpoints.
 
 
 
