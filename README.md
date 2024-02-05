@@ -1,6 +1,8 @@
 # Language-Guided World Models: A Model-Based Approach to AI Control
 This repository contains the code for running experiments. We propose *Language-Guided World Models* (LWMs), which can capture environment dynamics by reading language descriptions. There are two main phases of LWM learning, one being learning the language-guided world model by exploring the environment, and the other being model-based policy learning through imitation learning / behavior cloning.
 
+Visit [the project's website](https://language-guided-world-model.github.io/) to learn more.
+
 ![Example of LWM](teaser.gif)
 
 ## 🛠️ Getting Started: Setup
@@ -30,12 +32,12 @@ In this setting, the world model will learn from observing trajectories and the 
 ```
 bash scripts/train_wm.sh ${MODEL_NAME}
 ```
-where `${MODEL_NAME}` is one of 
+where `${MODEL_NAME}` is one of
 * `none` (observational, doesn't use language)
 * `standardv2` (standard Transformer)
 * `direct` (GPT-hard attention)
 * `emma` (our proposed EMMA-LWM model)
-* `oracle` (oracle semantic-parsing). 
+* `oracle` (oracle semantic-parsing).
 
 The above script will generate a folder in `experiments/` containing model checkpoints. For more details on the different models, see the paper. The seed is fixed here and can be changed in the script. Full results are in Table 1 of the paper.
 
@@ -60,7 +62,7 @@ Once you have learned a language-guided world model following "[Training the Wor
 ```
 bash scripts/train_downstream.sh ${TRAIN_TASK} ${MODEL_NAME} ${SPLIT} ${GAME}
 ```
-where 
+where
 * `${TRAIN_TASK}` is one of `imitation` (Imitation Learning) or `filtered_bc` (Filtered Behavior cloning). See paper for more details.
 * `${MODEL_NAME}` is one of the world models listed in the [Training the World Model](#training-the-world-model) section that has been trained.
 * `${SPLIT}` is the difficulty to evaluate on, and is one of `easy` (NewCombo), `medium` (NewAttr), `hard`(NewAll). See paper for more details.
@@ -70,6 +72,9 @@ where
 The above script will generate a folder in `experiments/` containing model checkpoints.
 
 
+## Credits
 
+* https://github.com/eloialonso/iris
+* https://github.com/karpathy/minGPT
 
 
