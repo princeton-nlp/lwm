@@ -77,4 +77,13 @@ The above script will generate a folder in `experiments/` containing model check
 * https://github.com/eloialonso/iris
 * https://github.com/karpathy/minGPT
 
+## Citation
 
+```
+@article{zhang2024languageguided
+  title={Language-Guided World Models: Shaping Artificial Minds through Words},
+  author={Zhang, Alex and Nguyen, Khanh and Tuyls, Jens and Lin, Albert and Narasimhan, Karthik},
+  year={2024},
+  journal={arXiv},
+}
+```
