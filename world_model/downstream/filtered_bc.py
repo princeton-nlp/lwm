@@ -94,7 +94,7 @@ class FilteredBCTrainer:
         # shuffle buffer
         self.random.shuffle(self.buffer)
 
-        # fine best return
+        # find best return
         best_ret = max([x[0] for x in self.buffer])
 
         # pick top return trajectories

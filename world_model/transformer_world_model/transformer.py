@@ -143,22 +143,6 @@ class SelfAttention(nn.Module):
         self.resid_drop = nn.Dropout(config.resid_pdrop)
         self.proj = nn.Linear(config.embed_dim, config.embed_dim)
 
-        """
-        causal_mask = torch.tril(torch.ones(config.max_tokens, config.max_tokens))
-        block_causal_mask = torch.max(
-            causal_mask,
-            torch.block_diag(
-                *[
-                    torch.ones(config.tokens_per_block, config.tokens_per_block)
-                    for _ in range(config.max_blocks)
-                ]
-            ),
-        )
-        self.register_buffer(
-            "mask", causal_mask if config.attention == "causal" else block_causal_mask
-        )
-        """
-
     def forward(
         self,
         x: torch.Tensor,
@@ -242,9 +226,6 @@ class ExternalAttention(nn.Module):
 
         att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
         att = F.softmax(att, dim=-1)
-        # for i in range(att.size(1)):
-        #    print(att[0, i, 0].tolist())
-        # print()
         att = self.attn_drop(att)
 
         y = att @ v
@@ -255,68 +236,3 @@ class ExternalAttention(nn.Module):
         return y
 
 
-"""
-class KeyValueGenerator(nn.Module):
-    def __init__(self, config: TransformerConfig):
-        super().__init__()
-        self.key_attn = self.RepeatAttention(config)
-        self.value_attn = self.RepeatAttention(config)
-
-    def forward(
-        self, x_q: torch.Tensor, x_k: torch.Tensor, x_v: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
-        keys = self.key_attn(x_q, x_k, x_v)
-        values = self.value_attn(x_q, x_k, x_v)
-        return keys, values
-
-
-class RepeatAttention(nn.Module):
-
-    def __init__(self, config: TransformerConfig) -> None:
-        super().__init__()
-        assert config.embed_dim % config.num_heads == 0
-        self.num_heads = config.num_heads
-        self.key = nn.Linear(config.embed_dim, config.embed_dim)
-        self.query = nn.Linear(config.embed_dim, config.embed_dim)
-        self.value = nn.Linear(config.embed_dim, config.embed_dim)
-        self.attn_drop = nn.Dropout(config.attn_pdrop)
-        self.resid_drop = nn.Dropout(config.resid_pdrop)
-        self.proj = nn.Linear(config.embed_dim, config.embed_dim)
-
-    def _compute(
-        self, x_q: torch.Tensor, x_k: torch.Tensor, x_v: torch.Tensor, name: str
-    ) -> torch.Tensor:
-        B_q, T_q, C_q = x_q.size()
-        q = (
-            self.query(x_q)
-            .view(B_q, T_q, self.num_heads, C_q // self.num_heads)
-            .transpose(1, 2)
-        )  # (B, nh, T, hs)
-
-        B_k, T_k, C_k = x_k.size()
-        k = (
-            self.key(x_k)
-            .view(B_k, T_k, self.num_heads, C_k // self.num_heads)
-            .transpose(1, 2)
-        )  # (B, nh, T, hs)
-
-        B_v, N_v, T_v, C_v = x_v.size()
-        v = (
-            self.value(x_v)
-            .view(B_v, N_v, T_v, self.num_heads, C_v // self.num_heads)
-            .transpose(2, 3)
-        )  # (B, N, nh, T, hs)
-
-        att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
-        att = F.softmax(att, dim=-1)
-        att = self.attn_drop(att)  # (B, nh, T_q, T_v)
-
-        att = att.unsqueeze(1).expand(-1, N_v, -1, -1, -1)  # (B, N, nh, T_q, T_v)
-
-        y = att @ v  # (B, N, nh, T_q, hs)
-        y = rearrange(y, "b n h t e -> b n t (h e)")
-
-        y = self.resid_drop(self.proj(y))
-
-        return y
-"""

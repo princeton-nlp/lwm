@@ -121,7 +121,7 @@ class BaseDecoder(nn.Module):
 
 
 class StandardDecoder(BaseDecoder):
-    """Standard Transformer decoder with interleaved multi-headed self- and cros- attentions"""
+    """Standard Transformer decoder with interleaved multi-headed self- and cross-attentions"""
 
     def __init__(self, config: TransformerConfig):
         super().__init__(config)
@@ -188,6 +188,7 @@ class TrueGroundDecoder(StandardDecoder):
         assert num_steps <= self.config.max_tokens
         prev_steps = 0 if past_keys_values is None else past_keys_values.size
 
+        # TODO: change this to manual_values
         manual_keys = (self.manual_key_attn(encoded_manuals) * encoded_manuals).sum(
             dim=-2
         )

@@ -1,4 +1,5 @@
 from einops import rearrange
+from typing import List
 
 import torch
 import torch.nn as nn
@@ -41,7 +42,7 @@ class StandardEncoder(BaseEncoder):
     def __repr__(self) -> str:
         return "standard_encoder"
 
-    def forward(self, tokens: torch.Tensor) -> torch.Tensor:
+    def forward(self, tokens: List) -> torch.Tensor:
         embeds, _ = self.bert_encoder.encode(tokens)
         embeds = self.linear_proj(embeds)
 
@@ -61,7 +62,7 @@ class StandardEncoderV2(StandardEncoder):
     def __repr__(self) -> str:
         return "standard_encoder_v2"
 
-    def forward(self, tokens: torch.Tensor) -> torch.Tensor:
+    def forward(self, tokens: List) -> torch.Tensor:
         embeds, _ = self.bert_encoder.encode(tokens)
         embeds = self.linear_proj(embeds)
 
@@ -79,10 +80,7 @@ class StandardEncoderV2(StandardEncoder):
 
 
 class ParsedFeatureEncoder(BaseEncoder):
-    """Transformer encoder for descriptions that have been parsed into features by ChatGPT
-    Embed the descriptions and feed embeddings into a Transformer
-    Average the output over all features
-    """
+    """Transformer encoder for descriptions that have been parsed into features by ChatGPT"""
 
     def __init__(self, config: TransformerConfig):
         super().__init__(config)
@@ -114,6 +112,7 @@ class ParsedFeatureEncoder(BaseEncoder):
             torch.arange(num_steps, device=tokens.device)
         )
         x = self.transformer(sequences)
+        # B x N x L x E
         x = x.reshape(*shape[:2], *x.shape[1:])
 
         return x
@@ -140,13 +139,14 @@ class RawTextEncoder(BaseEncoder):
     def __repr__(self) -> str:
         return "raw_text_encoder"
 
-    def forward(self, tokens: torch.Tensor) -> torch.Tensor:
+    def forward(self, tokens: List) -> torch.Tensor:
         embeds, _ = self.bert_encoder.encode(tokens)
         embeds = self.linear_proj(embeds)
 
         shape = embeds.shape
         embeds = rearrange(embeds, "b n l e -> (b n) l e")
         x = self.transformer(embeds)
+        # B x N x L x E
         x = x.reshape(*shape[:2], *x.shape[1:])
 
         return x

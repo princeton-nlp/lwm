@@ -124,7 +124,7 @@ if __name__ == "__main__":
         assert args.exp_name is not None, "Experiment name is not provided!"
         args.save_dir = f"experiments/{args.exp_name}"
 
-    # make exp dir of not exist
+    # make exp dir if not exist
     if args.eval_mode == 0:
         if os.path.exists(args.save_dir):
             print(f"Output folder {args.save_dir} exists")

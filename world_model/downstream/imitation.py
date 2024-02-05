@@ -107,16 +107,4 @@ class ImitationTrainer:
         texts = torch.stack(seqs["text"]).detach()
         masks = torch.tensor(seqs["mask"]).to(self.device).bool()
 
-        """
-        print(states.shape)
-        id = 0
-        for i in range(states.shape[1]):
-            print(ENTITY_IDS)
-            print(memory.manuals[0])
-            print("action", actions[id, i])
-            print(states[id, i].sum(-1))
-            print("ref action", ref_actions[id, i])
-            input()
-        """
-
         return states, actions, ref_actions, texts, masks

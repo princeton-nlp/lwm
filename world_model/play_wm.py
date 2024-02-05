@@ -53,7 +53,9 @@ obs, info = env.reset(split=split, entities=game)
 env.render()
 
 while True:
-    action = int(input("Please input next action (0: up, 1: down, 2: left, 3: right, 4: stay)\n"))
+    action = int(
+        input("Please input next action (0: up, 1: down, 2: left, 3: right, 4: stay)\n")
+    )
     obs, reward, done, _ = env.step(action)
 
     print()

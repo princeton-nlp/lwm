@@ -213,15 +213,6 @@ def compute_metrics(split, episode, env):
             else:
                 done_accs.append(is_done_correct(po, co, a, episode.true_parsed_manual))
 
-            """
-            print(ENTITY_IDS)
-            print(episode.true_parsed_manual)
-            print(po.sum(-1))
-            print(co.sum(-1))
-            print(a, r, d)
-            print(i, done_accs[-1])
-            """
-
     return dists, reward_accs, done_accs
 
 

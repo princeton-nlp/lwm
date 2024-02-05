@@ -107,22 +107,6 @@ def make():
     )
     parser.add_argument("--weight_decay", default=0.01, type=float, help="Weight decay")
     parser.add_argument(
-        "--decay_lr", type=int, default=0, help="whether to decay learning rate"
-    )
-
-    parser.add_argument(
-        "--min_lr", type=float, default=1e-5, help="minimum learning rate"
-    )
-    parser.add_argument(
-        "--lr_decay_iters",
-        type=int,
-        default=100000,
-        help="number of weight decay iterations",
-    )
-    parser.add_argument(
-        "--warmup_iters", type=int, default=3000, help="number of warmup iterations"
-    )
-    parser.add_argument(
         "--save_every_batches",
         type=int,
         default=None,
@@ -173,7 +157,6 @@ def make():
     )
     parser.add_argument("--data_gen.num_train", default=100000, type=int)
     parser.add_argument("--data_gen.num_eval", default=500, type=int)
-    # parser.add_argument("--data_gen.max_rollout_length", default=32, type=int)
     parser.add_argument(
         "--data_gen.behavior_policy",
         default="mixed",
@@ -186,18 +169,6 @@ def make():
         default=None,
         help="Path to policy weights",
     )
-
-    """
-    parser.add_argument(
-        "--data_gen.fix_split",
-        default=None,
-        type=str,
-        help="fix a split to generate from",
-    )
-    parser.add_argument(
-        "--data_gen.fix_game_id", default=None, type=int, help="game id to evaluate"
-    )
-    """
 
     # EMMA policy arguments
     parser.add_argument(

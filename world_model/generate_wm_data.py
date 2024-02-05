@@ -82,44 +82,19 @@ class DataGenerator:
         if not self.save_path.endswith(".pickle"):
             self.save_path = self.save_path + ".pickle"
 
-        # self.max_rollout_len = args.data_gen.max_rollout_length
         self.behavior_policy = args.data_gen.behavior_policy
         self.num_train = args.data_gen.num_train
         self.num_eval = args.data_gen.num_eval
 
-        """
-        fix_split = args.data_gen.fix_split
-        fix_game_id = args.data_gen.fix_game_id
-        """
         behavior_policy_weights_path = args.data_gen.behavior_policy_weights_path
         wm_weights_path = args.wm_weights_path
 
-        # load splits
+        # load data
         with open(args.splits_path) as f:
             self.splits = json.load(f)
 
-        """
-        if fix_split is not None:
-            if fix_game_id is not None:
-                self.splits = {fix_split: [self.splits[fix_split][fix_game_id]]}
-            else:
-                self.splits = {fix_split: self.splits[fix_split]}
-        """
-
-        # load texts[entity][movement][role][split] dict
         with open(args.texts_path) as f:
             self.texts = json.load(f)
-
-        """
-        # setup policy
-        if behavior_policy_weights_path is not None:
-            self.policy = EmmaPolicy()
-            self.policy.load_state_dict(
-                torch.load(behavior_policy_weights_path, map_location=args.device)
-            )
-            print("Successfully loaded EMMA policy weights.")
-        else:
-        """
 
         self.policy = Oracle(args)
 

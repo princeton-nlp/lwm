@@ -1,3 +1,5 @@
+""" adapted from https://github.com/eloialonso/iris/blob/main/src/dataset.py"""
+
 from collections import deque
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple

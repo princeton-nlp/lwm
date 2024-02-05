@@ -1,4 +1,4 @@
-""" all models in one file """
+""" adapted from https://github.com/eloialonso/iris """
 
 from typing import Any, Optional, Tuple, List
 from collections import OrderedDict
@@ -162,7 +162,7 @@ class WorldModel(nn.Module):
 
         out = torch.tensor(out).to(
             self.encoder.device
-        )  # B x num_entities x num_attributes
+        )
 
         return out
 
@@ -257,7 +257,7 @@ class WorldModel(nn.Module):
         logits["reward"] = outputs.logits_rewards[:, 1:]
         logits["done"] = outputs.logits_dones[:, 1:]
 
-        # compute losses
+        # compute loss
         loss = {}
         for k in logits:
             loss[k] = F.cross_entropy(logits[k].flatten(0, 1), labels[k].flatten(0, 1))
