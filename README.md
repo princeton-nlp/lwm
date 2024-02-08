@@ -19,7 +19,7 @@ Install the relevant dependencies through pip:
 pip install -r requirements.txt
 ```
 
-Finally, download the dataset from [this link](https://drive.google.com/file/d/12SSqm_oATfF-eSvU_DBjlvzS38DdIz87/view?usp=sharing) and put it inside `world_model/custom_dataset`
+Finally, download the trajectory dataset from [this link](https://drive.google.com/file/d/1yEjNhvzNWJkCQyCudyNuu3uNruQKel28/view?usp=sharing), unzip the file (~7 GB), and put the .pickle file inside `world_model/custom_dataset`
 
 ## 🌎 Training the World Model
 
