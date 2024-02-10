@@ -19,7 +19,12 @@ Install the relevant dependencies through pip:
 pip install -r requirements.txt
 ```
 
+### Trajectory Dataset Link
 Finally, download the trajectory dataset from [this link](https://drive.google.com/file/d/1vUwP4EzBMrmDZWhmnXFie2woWbGzjKUq/view?usp=sharing), unzip the file (~7 GB), and put the .pickle file inside `world_model/custom_dataset`
+
+### Pre-trained Checkpoints
+Read the following sections for different steps of the training process (train WM, then train policy). We provide some checkpoints for both the trained world model, as well as the expert EMMA policy that you can use to skip world model training.
+These were the some of the checkpoints used in the experiments described in the paper. Download the checkpoints [at this link](https://drive.google.com/file/d/1YiQyjeInXqztyffAbZ-8SDsnS2II8HUh/view?usp=sharing) and place them in an appropriate folder.
 
 ## 🌎 Training the World Model
 
